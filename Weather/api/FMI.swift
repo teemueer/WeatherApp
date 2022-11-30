@@ -12,13 +12,14 @@ class FMI: ObservableObject {
     private var fmiParser = FMIParser()
     
     @Published var loading = false
-    @Published var place: Place?
+    @Published var place: String?
+    @Published var data: [WeatherStatus]?
     
     init() {
-        self.getForecast(placeName: "Espoo")
+        self.getForecast(place: "Espoo")
     }
 
-    func getForecast(placeName: String) {
+    func getForecast(place: String) {
         self.loading = true
         
         var url = URL(string: baseUrl)
@@ -28,7 +29,7 @@ class FMI: ObservableObject {
         url?.append(queryItems: [
             URLQueryItem(name: "request", value: "getFeature"),
             URLQueryItem(name: "storedquery_id", value: "fmi::forecast::harmonie::surface::point::timevaluepair"),
-            URLQueryItem(name: "place", value: placeName),
+            URLQueryItem(name: "place", value: place),
             URLQueryItem(name: "parameters", value: parametersString)
         ])
         
@@ -49,24 +50,16 @@ class FMI: ObservableObject {
             parser.parse()
             
             DispatchQueue.main.async {
-                self.place = Place(name: placeName)
-                self.place?.temperatures = self.fmiParser.temperatures
-                self.place?.symbols = self.fmiParser.symbols
+                self.place = place
+                self.data = self.fmiParser.data
                 self.loading = false
+                
+                self.data?.forEach { (weatherStatus) in
+                    print(weatherStatus.date, weatherStatus.symbol)
+                }
             }
         }
         task.resume()
     }
     
-}
-
-func Measurement2SystemName(measurement: Measurement) -> String {
-    switch measurement.value {
-    case 3.0:
-        return "cloud"
-    case 51.0:
-        return "cloud.snow"
-    default:
-        return "sun"
-    }
 }

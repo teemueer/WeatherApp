@@ -7,23 +7,41 @@
 
 import Foundation
 
-struct Measurement {
-    let timestamp: String
-    let value: Float
+class WeatherStatus: Identifiable {
+    let id = UUID()
+    var date: Date?
+    var humidity: Float?
+    var temperature: Float?
+    var symbol: String?
+    var windDirection: Float?
+    var windSpeed: Float?
+    
+    init(date: Date?) {
+        self.date = date
+    }
+    
+    var hours: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self.date!)
+    }
 }
 
 enum Identifier: String, CaseIterable {
+    case Humidity
     case Temperature
     case WeatherSymbol3
+    case WindDirection
+    case WindSpeedMS
 }
 
 class FMIParser: NSObject, XMLParserDelegate {
     private var currentElement: String?
     private var currentIdentifier: Identifier?
-    private var currentTimestamp: String?
+    private var currentDate: Date?
+    private let dateFormatter = ISO8601DateFormatter()
     
-    var temperatures = [Measurement]()
-    var symbols = [Measurement]()
+    var data = [WeatherStatus]()
     
     // element start
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -49,24 +67,50 @@ class FMIParser: NSObject, XMLParserDelegate {
         let s = string.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if currentElement == "wml2:time" {
-            self.currentTimestamp = s
+            self.currentDate = self.dateFormatter.date(from: s)!
+            let weatherStatus = self.data.first(where: {$0.date == self.currentDate})
+            if weatherStatus == nil {
+                self.data.append(WeatherStatus(date: self.currentDate))
+            }
             return
         }
 
         if (currentElement != "wml2:value") {
             return
         }
-
-        let measurement = Measurement(timestamp: self.currentTimestamp!, value: Float(s)!)
         
+        let value = Float(s)
+        let weatherStatus = self.data.first(where: {$0.date == self.currentDate})
+
         switch self.currentIdentifier {
+        case .Humidity:
+            weatherStatus?.humidity = value
         case .Temperature:
-            self.temperatures.append(measurement)
+            weatherStatus?.temperature = value
         case .WeatherSymbol3:
-            self.symbols.append(measurement)
+            weatherStatus?.symbol = GetSymbol(value!)
+        case .WindDirection:
+            weatherStatus?.windDirection = value
+        case .WindSpeedMS:
+            weatherStatus?.windSpeed = value
         default:
             break
         }
     }
-    
+}
+
+func GetSymbol(_ value: Float) -> String {
+    switch value {
+    case 2.0:
+        return "cloud.sun.fill"
+    case 3.0:
+        return "cloud.fill"
+    case 31.0:
+        return "cloud.rain.fill"
+    case 51.0, 52.0:
+        return "cloud.snow.fill"
+    default:
+        print("unknown value: \(value)")
+        return "questionmark.circle"
+    }
 }

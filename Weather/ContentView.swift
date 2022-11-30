@@ -14,7 +14,7 @@ struct ContentView: View {
         if fmi.loading {
             ProgressView()
         } else {
-            MainView(place: fmi.place!)
+            MainView(place: fmi.place!, data: fmi.data!)
         }
     }
 }
