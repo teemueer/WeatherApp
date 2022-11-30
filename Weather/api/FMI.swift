@@ -55,7 +55,7 @@ class FMI: ObservableObject {
                 self.loading = false
                 
                 self.data?.forEach { (weatherStatus) in
-                    print(weatherStatus.date, weatherStatus.symbol)
+                    //print(weatherStatus.date!, weatherStatus.symbol!)
                 }
             }
         }

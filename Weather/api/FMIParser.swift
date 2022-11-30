@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherStatus: Identifiable {
+class WeatherStatus: Identifiable, ObservableObject {
     let id = UUID()
     var date: Date?
     var humidity: Float?
