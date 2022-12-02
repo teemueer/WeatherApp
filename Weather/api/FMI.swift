@@ -54,8 +54,9 @@ class FMI: ObservableObject {
                 self.data = self.fmiParser.data
                 self.loading = false
                 
+                
                 self.data?.forEach { (weatherStatus) in
-                    //print(weatherStatus.date!, weatherStatus.symbol!)
+                    print(weatherStatus.windSpeed!, weatherStatus.windDirection!)
                 }
             }
         }

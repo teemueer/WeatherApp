@@ -14,7 +14,8 @@ struct ContentView: View {
         if fmi.loading {
             ProgressView()
         } else {
-            MainView(place: fmi.place!, data: fmi.data!)
+            //MainView(place: fmi.place!, data: fmi.data!)
+            BetaMainView(place: fmi.place!, data: fmi.data!)
         }
     }
 }

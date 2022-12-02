@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Weather
-//
-//  Created by iosdev on 28.11.2022.
-//
-
 import SwiftUI
 
 struct MainView: View {
@@ -96,11 +89,6 @@ struct MainView: View {
                     .padding()
                 
                 VStack {
-                    ForEach(1..<30) { i in
-                        if i % 3 == 0 {
-                            ForecastView(status: (self.data[i]))
-                        }
-                    }
                 }
             }
             
