@@ -2,7 +2,7 @@
 //  BetaMainView.swift
 //  Weather
 //
-//  Created by iosdev on 1.12.2022.
+//  Created by Juho on 1.12.2022.
 //
 import MapKit
 import SwiftUI
@@ -43,12 +43,12 @@ struct BetaMainView: View {
             //Top Buttons
             HStack(alignment: .center){
                 Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    
                 }
                 Spacer()
                     .frame(width: 200.0)
                 Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    
                 }
                 
             }.padding()

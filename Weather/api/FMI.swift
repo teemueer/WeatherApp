@@ -18,7 +18,7 @@ class FMI: ObservableObject {
     init() {
         self.getForecast(place: "Espoo")
     }
-
+    
     func getForecast(place: String) {
         self.loading = true
         
@@ -56,11 +56,50 @@ class FMI: ObservableObject {
                 
                 
                 self.data?.forEach { (weatherStatus) in
-                    print(weatherStatus.windSpeed!, weatherStatus.windDirection!)
+                  //  print(weatherStatus.windSpeed!, weatherStatus.windDirection!)
                 }
             }
         }
         task.resume()
     }
     
+    func getForecastFavourite(place: String) -> ([WeatherStatus]) {
+        self.loading = true
+        var dataF: [WeatherStatus]?
+        
+        var url = URL(string: baseUrl)
+        
+        let parametersString = Identifier.allCases.map({$0.rawValue}).joined(separator: ",")
+        
+        url?.append(queryItems: [
+            URLQueryItem(name: "request", value: "getFeature"),
+            URLQueryItem(name: "storedquery_id", value: "fmi::forecast::harmonie::surface::point::timevaluepair"),
+            URLQueryItem(name: "place", value: place),
+            URLQueryItem(name: "parameters", value: parametersString)
+        ])
+        
+        let request = URLRequest(url: url!)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("dataTaskWithRequest error: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                print("dataTaskWithRequest data is nil")
+                return
+            }
+            
+            let parser = XMLParser(data: data)
+            parser.delegate = self.fmiParser
+            parser.parse()
+            
+            DispatchQueue.main.async {
+                dataF = self.fmiParser.data
+                self.loading = false
+            }
+        }
+        task.resume()
+        return dataF ?? []
+    }
 }
