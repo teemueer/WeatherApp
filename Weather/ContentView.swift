@@ -14,7 +14,7 @@ enum ViewType {
 }
 
 class NavigationManager: ObservableObject {
-    @Published var viewType: ViewType = .favourites
+    @Published var viewType: ViewType = .main
     @Published var showMenu = false
 }
 
