@@ -7,37 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A096208293671A500259D08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A096207293671A500259D08 /* ContentView.swift */; };
+		6A6B6B4F293F40DF00D015E4 /* FavouriteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6B4D293F40DF00D015E4 /* FavouriteModel.xcdatamodeld */; };
+		6A6B6B51293F412B00D015E4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6B50293F412B00D015E4 /* DataController.swift */; };
+		6A6B6B56293F41F100D015E4 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6B55293F41F100D015E4 /* WeatherView.swift */; };
+		6A6B6B58293F424300D015E4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6B57293F424300D015E4 /* MainView.swift */; };
+		6A6B6B5A293F443F00D015E4 /* AddFavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6B59293F443F00D015E4 /* AddFavouriteView.swift */; };
 		6A9266BF2934CB6F00C55BF2 /* WeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9266BE2934CB6F00C55BF2 /* WeatherApp.swift */; };
-		6A9266C12934CB6F00C55BF2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9266C02934CB6F00C55BF2 /* MainView.swift */; };
 		6A9266C32934CB7100C55BF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A9266C22934CB7100C55BF2 /* Assets.xcassets */; };
 		6A9266C62934CB7100C55BF2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A9266C52934CB7100C55BF2 /* Preview Assets.xcassets */; };
 		6A9266D52934CBA100C55BF2 /* FMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9266D42934CBA100C55BF2 /* FMI.swift */; };
 		6A9266DB2935045D00C55BF2 /* FMIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9266DA2935045D00C55BF2 /* FMIParser.swift */; };
 		6A9266DF293507F100C55BF2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9266DE293507F100C55BF2 /* Place.swift */; };
-		6A9E8656293DDB06004045F5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9E8655293DDB06004045F5 /* MenuView.swift */; };
 		6AD4A36D293789E60056D07F /* SpeechRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A36C293789E60056D07F /* SpeechRecognition.swift */; };
-		6AD4A36F2938E3760056D07F /* BetaMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A36E2938E3760056D07F /* BetaMainView.swift */; };
 		6AD4A376293B77260056D07F /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A375293B77260056D07F /* FavouriteView.swift */; };
-		6AD4A378293B7F710056D07F /* favouriteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A377293B7F710056D07F /* favouriteMapView.swift */; };
 		6AD4A37A293CD1890056D07F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A379293CD1890056D07F /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6A096207293671A500259D08 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6A6B6B4E293F40DF00D015E4 /* FavouriteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouriteModel.xcdatamodel; sourceTree = "<group>"; };
+		6A6B6B50293F412B00D015E4 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		6A6B6B55293F41F100D015E4 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		6A6B6B57293F424300D015E4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6A6B6B59293F443F00D015E4 /* AddFavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavouriteView.swift; sourceTree = "<group>"; };
 		6A9266BB2934CB6F00C55BF2 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9266BE2934CB6F00C55BF2 /* WeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApp.swift; sourceTree = "<group>"; };
-		6A9266C02934CB6F00C55BF2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A9266C22934CB7100C55BF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A9266C52934CB7100C55BF2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6A9266D42934CBA100C55BF2 /* FMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMI.swift; sourceTree = "<group>"; };
 		6A9266DA2935045D00C55BF2 /* FMIParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMIParser.swift; sourceTree = "<group>"; };
 		6A9266DE293507F100C55BF2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		6A9E8655293DDB06004045F5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		6AD4A36C293789E60056D07F /* SpeechRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognition.swift; sourceTree = "<group>"; };
-		6AD4A36E2938E3760056D07F /* BetaMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaMainView.swift; sourceTree = "<group>"; };
 		6AD4A375293B77260056D07F /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
-		6AD4A377293B7F710056D07F /* favouriteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteMapView.swift; sourceTree = "<group>"; };
 		6AD4A379293CD1890056D07F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +52,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A6B6B4C293F40CD00D015E4 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6A6B6B4D293F40DF00D015E4 /* FavouriteModel.xcdatamodeld */,
+				6A6B6B50293F412B00D015E4 /* DataController.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		6A6B6B52293F418600D015E4 /* favourites */ = {
+			isa = PBXGroup;
+			children = (
+				6AD4A375293B77260056D07F /* FavouriteView.swift */,
+				6A6B6B59293F443F00D015E4 /* AddFavouriteView.swift */,
+			);
+			path = favourites;
+			sourceTree = "<group>";
+		};
+		6A6B6B53293F419000D015E4 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				6AD4A379293CD1890056D07F /* SettingsView.swift */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
+		6A6B6B54293F41E500D015E4 /* weather */ = {
+			isa = PBXGroup;
+			children = (
+				6A6B6B55293F41F100D015E4 /* WeatherView.swift */,
+			);
+			path = weather;
+			sourceTree = "<group>";
+		};
 		6A9266B22934CB6F00C55BF2 = {
 			isa = PBXGroup;
 			children = (
@@ -71,13 +105,13 @@
 		6A9266BD2934CB6F00C55BF2 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				6A6B6B4C293F40CD00D015E4 /* data */,
 				6AD4A36B2937898A0056D07F /* Dictation */,
 				6A9266CD2934CB7A00C55BF2 /* views */,
 				6A9266CC2934CB7500C55BF2 /* api */,
 				6A9266BE2934CB6F00C55BF2 /* WeatherApp.swift */,
 				6A9266C22934CB7100C55BF2 /* Assets.xcassets */,
 				6A9266C42934CB7100C55BF2 /* Preview Content */,
-				6A096207293671A500259D08 /* ContentView.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -103,11 +137,10 @@
 		6A9266CD2934CB7A00C55BF2 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				6A9E8654293DDAFE004045F5 /* menu */,
+				6A6B6B54293F41E500D015E4 /* weather */,
+				6A6B6B53293F419000D015E4 /* settings */,
+				6A6B6B52293F418600D015E4 /* favourites */,
 				6A9266CE2934CB7E00C55BF2 /* main */,
-				6AD4A375293B77260056D07F /* FavouriteView.swift */,
-				6AD4A377293B7F710056D07F /* favouriteMapView.swift */,
-				6AD4A379293CD1890056D07F /* SettingsView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -115,18 +148,9 @@
 		6A9266CE2934CB7E00C55BF2 /* main */ = {
 			isa = PBXGroup;
 			children = (
-				6A9266C02934CB6F00C55BF2 /* MainView.swift */,
-				6AD4A36E2938E3760056D07F /* BetaMainView.swift */,
+				6A6B6B57293F424300D015E4 /* MainView.swift */,
 			);
 			path = main;
-			sourceTree = "<group>";
-		};
-		6A9E8654293DDAFE004045F5 /* menu */ = {
-			isa = PBXGroup;
-			children = (
-				6A9E8655293DDB06004045F5 /* MenuView.swift */,
-			);
-			path = menu;
 			sourceTree = "<group>";
 		};
 		6AD4A36B2937898A0056D07F /* Dictation */ = {
@@ -207,12 +231,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A9266C12934CB6F00C55BF2 /* MainView.swift in Sources */,
-				6A9E8656293DDB06004045F5 /* MenuView.swift in Sources */,
-				6AD4A378293B7F710056D07F /* favouriteMapView.swift in Sources */,
-				6AD4A36F2938E3760056D07F /* BetaMainView.swift in Sources */,
+				6A6B6B56293F41F100D015E4 /* WeatherView.swift in Sources */,
+				6A6B6B58293F424300D015E4 /* MainView.swift in Sources */,
 				6A9266DF293507F100C55BF2 /* Place.swift in Sources */,
-				6A096208293671A500259D08 /* ContentView.swift in Sources */,
+				6A6B6B4F293F40DF00D015E4 /* FavouriteModel.xcdatamodeld in Sources */,
+				6A6B6B5A293F443F00D015E4 /* AddFavouriteView.swift in Sources */,
+				6A6B6B51293F412B00D015E4 /* DataController.swift in Sources */,
 				6A9266BF2934CB6F00C55BF2 /* WeatherApp.swift in Sources */,
 				6A9266D52934CBA100C55BF2 /* FMI.swift in Sources */,
 				6AD4A36D293789E60056D07F /* SpeechRecognition.swift in Sources */,
@@ -421,6 +445,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6A6B6B4D293F40DF00D015E4 /* FavouriteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6A6B6B4E293F40DF00D015E4 /* FavouriteModel.xcdatamodel */,
+			);
+			currentVersion = 6A6B6B4E293F40DF00D015E4 /* FavouriteModel.xcdatamodel */;
+			path = FavouriteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6A9266B32934CB6F00C55BF2 /* Project object */;
 }

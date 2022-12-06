@@ -13,12 +13,9 @@ struct Location: Identifiable {
     let coordinate:CLLocationCoordinate2D
 }
 
-struct BetaMainView: View {
-    
-    var place: String
-    var data: [WeatherStatus]
-    @StateObject var fmi = FMI()
-    @State private var placeSearch: String = ""
+struct WeatherView: View {
+    @EnvironmentObject var fmi: FMI
+
     @StateObject var speechRecognition = SpeechRecognizer()
     @State private var isRecording:Bool = false
     @State private var transcript: String = ""
@@ -38,21 +35,6 @@ struct BetaMainView: View {
     var body: some View {
         
         VStack(){
-            Spacer()
-                .frame(height: 20.0)
-            //Top Buttons
-            HStack(alignment: .center){
-                Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    
-                }
-                Spacer()
-                    .frame(width: 200.0)
-                Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    
-                }
-                
-            }.padding()
-            
             // Stack with map and current weather
             ZStack() {
                 Map(coordinateRegion: $mapRegion, annotationItems: locations){
@@ -69,13 +51,14 @@ struct BetaMainView: View {
                         }
                     }
                 }
+ 
                 RoundedRectangle(cornerRadius: 20)
                     .frame(width: 220.0)
                     .opacity(0.85)
                     .offset(x: /*@START_MENU_TOKEN@*/-65.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                 
                 VStack{
-                    Text(fmi.place ?? "Init")
+                    Text(fmi.place)
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
@@ -84,13 +67,13 @@ struct BetaMainView: View {
                         .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     
                     HStack(alignment: .bottom){
-                        Text(String(format: "%.1f°C", fmi.data?[0].temperature! ?? " "))
+                        Text(String(format: "%.1f°C", fmi.data[0].temperature!))
                             .font(.largeTitle)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.white)
                         Spacer()
                             .frame(width: 30.0)
-                        Image(systemName: fmi.data?[0].symbol! ?? "cloud.sun")
+                        Image(systemName: fmi.data[0].symbol!)
                             .renderingMode(.original)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -116,15 +99,15 @@ struct BetaMainView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     VStack{
                         HStack{
-                            ForEach(2..<21){i in
+                            ForEach(2..<21) { i in
                                 VStack{
-                                    Text(self.data[i].hours)
-                                    Image(systemName:self.data[i].symbol!)
+                                    Text(fmi.data[i].hours)
+                                    Image(systemName: fmi.data[i].symbol!)
                                         .renderingMode(.original)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 40.0, height: 40)
-                                    Text(String(format: "%.1f°C", self.data[i].temperature!))
+                                    Text(String(format: "%.1f°C", fmi.data[i].temperature!))
                                 }
                                 .frame(width: 80.0, height: 150.0)
                                 .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
@@ -145,7 +128,7 @@ struct BetaMainView: View {
             HStack{
 
                 ZStack{
-                    Text(String(format: "%.1f m/s", self.data[0].windSpeed!))
+                    Text(String(format: "%.1f m/s", fmi.data[0].windSpeed!))
                 }
                 .frame(width: 170.0, height: 150.0)
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
