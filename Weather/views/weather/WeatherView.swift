@@ -19,11 +19,15 @@ struct WeatherView: View {
     @StateObject var speechRecognition = SpeechRecognizer()
     @State private var isRecording:Bool = false
     @State private var transcript: String = ""
+    @StateObject var geolocation = geolocate()
+    
     
     // Created a map with a starting point @ Karamalmi, Espoo
     //TODO: Get location from device on startup and ask for
     //weather query
-    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.224, longitude: 24.70), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.005))
+    
+    
+    
     
     
     //Hardcoded locations as a test.
@@ -33,23 +37,14 @@ struct WeatherView: View {
     ]
     
     var body: some View {
-        
         VStack(){
             // Stack with map and current weather
             ZStack() {
-                Map(coordinateRegion: $mapRegion, annotationItems: locations){
-                    location in
-                    MapAnnotation(coordinate: location.coordinate){
-                        VStack{
-                            Text(location.name)
-                            Circle()
-                                .stroke(.red,lineWidth: 2)
-                                .frame(width: 20,height: 20)
-                                .onTapGesture {
-                                    print("tapped on \(location.name)")
-                                }
-                        }
-                    }
+                Map(coordinateRegion: $geolocation.mapRegion,showsUserLocation: true)
+                .ignoresSafeArea()
+                .accentColor(Color(.systemBlue))
+                .onAppear{
+                    geolocation.checkLocationServices()
                 }
  
                 RoundedRectangle(cornerRadius: 20)

@@ -21,6 +21,7 @@
 		6AD4A36D293789E60056D07F /* SpeechRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A36C293789E60056D07F /* SpeechRecognition.swift */; };
 		6AD4A376293B77260056D07F /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A375293B77260056D07F /* FavouriteView.swift */; };
 		6AD4A37A293CD1890056D07F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A379293CD1890056D07F /* SettingsView.swift */; };
+		6AD4A431293F71EC0056D07F /* geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4A430293F71EC0056D07F /* geolocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		6AD4A36C293789E60056D07F /* SpeechRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognition.swift; sourceTree = "<group>"; };
 		6AD4A375293B77260056D07F /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
 		6AD4A379293CD1890056D07F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6AD4A430293F71EC0056D07F /* geolocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geolocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		6A9266BD2934CB6F00C55BF2 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				6AD4A42F293F71D30056D07F /* location */,
 				6A6B6B4C293F40CD00D015E4 /* data */,
 				6AD4A36B2937898A0056D07F /* Dictation */,
 				6A9266CD2934CB7A00C55BF2 /* views */,
@@ -159,6 +162,14 @@
 				6AD4A36C293789E60056D07F /* SpeechRecognition.swift */,
 			);
 			path = Dictation;
+			sourceTree = "<group>";
+		};
+		6AD4A42F293F71D30056D07F /* location */ = {
+			isa = PBXGroup;
+			children = (
+				6AD4A430293F71EC0056D07F /* geolocation.swift */,
+			);
+			path = location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +248,7 @@
 				6A6B6B4F293F40DF00D015E4 /* FavouriteModel.xcdatamodeld in Sources */,
 				6A6B6B5A293F443F00D015E4 /* AddFavouriteView.swift in Sources */,
 				6A6B6B51293F412B00D015E4 /* DataController.swift in Sources */,
+				6AD4A431293F71EC0056D07F /* geolocation.swift in Sources */,
 				6A9266BF2934CB6F00C55BF2 /* WeatherApp.swift in Sources */,
 				6A9266D52934CBA100C55BF2 /* FMI.swift in Sources */,
 				6AD4A36D293789E60056D07F /* SpeechRecognition.swift in Sources */,
@@ -373,6 +385,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Weather/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires location to show user on map.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used for dictation lmao";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used for dictation lmao";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -403,6 +416,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Weather/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires location to show user on map.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used for dictation lmao";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Used for dictation lmao";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
