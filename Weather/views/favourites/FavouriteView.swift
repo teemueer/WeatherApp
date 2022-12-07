@@ -17,24 +17,26 @@ struct FavouriteView: View {
     @State private var showingAddView = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(alignment: .leading) {
                 List {
-                    ForEach(favourites) { favourite in
-                        Button {
-                            fmi.place = favourite.place!
-                            readyToNavigate = true
-                        } label: {
-                            Text(favourite.place!)
-                        }
-                        .buttonStyle(.plain)
-                        .navigationDestination(isPresented: $readyToNavigate) {
-                            WeatherView()
+                    ForEach(favourites) { fav in
+                        if fmi.data[fav.place!] != nil {
+                            NavigationLink {
+                                WeatherView(place: fav.place!)
+                            } label : {
+                                FavouriteRowView(place: fav.place!, data: fmi.data[fav.place!]!)
+                            }
                         }
                     }
                     .onDelete(perform: deleteFavourite)
                 }
                 .listStyle(.plain)
+                .onAppear {
+                    for fav in favourites {
+                        fmi.getForecast(place: fav.place!)
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

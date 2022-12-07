@@ -15,17 +15,17 @@ struct MainView: View {
             ProgressView()
         } else {
             TabView {
-                WeatherView()
+                WeatherView(place: "Espoo")
                     .tabItem { Image(systemName: "house").imageScale(.large) }
                     .tag(1)
-                
+
                 FavouriteView()
                     .tabItem { Image(systemName: "list.dash").imageScale(.large) }
-                    .tag(2)
+                    .tag(1)
                 
                 SettingsView()
                     .tabItem { Image(systemName: "gear").imageScale(.large) }
-                    .tag(3)
+                    .tag(2)
             }
         }
     }

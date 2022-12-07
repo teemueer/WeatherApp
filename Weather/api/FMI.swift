@@ -12,18 +12,13 @@ class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
     private var fmiParser = FMIParser()
     
-    @Published var place: String = "Espoo"
-    @Published var data: [WeatherStatus] = []
-    
-    var subscriptions = Set<AnyCancellable>()
+    @Published var data: [String: [WeatherStatus]] = [:]
     
     init() {
-        $place.sink { [weak self] term in
-            self?.getForecast()
-        }.store(in: &subscriptions)
+        getForecast(place: "Espoo")
     }
-
-    func getForecast() {
+    
+    func getForecast(place: String) {
         var url = URL(string: baseUrl)
         
         let parametersString = Identifier.allCases.map({$0.rawValue}).joined(separator: ",")
@@ -52,10 +47,7 @@ class FMI: ObservableObject {
             parser.parse()
             
             DispatchQueue.main.async {
-                self.data = self.fmiParser.data
-                self.data.forEach { (weatherStatus) in
-                    print(weatherStatus.date, weatherStatus.temperature)
-                }
+                self.data[place] = self.fmiParser.data
             }
         }
         task.resume()
