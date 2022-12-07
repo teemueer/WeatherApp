@@ -38,6 +38,9 @@ struct WeatherView: View {
     
     var body: some View {
         VStack(){
+            
+            
+            
             // Stack with map and current weather
             ZStack() {
                 Map(coordinateRegion: $geolocation.mapRegion,showsUserLocation: true)

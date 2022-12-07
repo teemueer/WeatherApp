@@ -47,7 +47,7 @@ struct FavouriteView: View {
             }.sheet(isPresented: $showingAddView) {
                 AddFavouriteView()
             }
-            .navigationTitle("Favourites")
+            .navigationTitle("favor")
         }
     }
     

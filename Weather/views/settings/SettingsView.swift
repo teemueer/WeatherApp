@@ -27,7 +27,7 @@ struct SettingsView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30.0, height: 30)
                     Spacer()
-                Text("Settings")
+                Text("settings")
                     .font(.title)
                     .fontWeight(.bold)
                 Spacer()
@@ -38,7 +38,7 @@ struct SettingsView: View {
             //Settings begin here
             
             //Unit of measurement
-            Text("Unit Of Measurement")
+            Text("unit")
             VStack(alignment: .leading){
                 HStack{
                     Spacer()
@@ -90,24 +90,33 @@ struct SettingsView: View {
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-                Text("Selected: \(selectedText)")
-            }
+                HStack{
+                    Text("selected");Text(":\(selectedText)")
+                }
+                }
             
             //Color mode
-            Text("Color Mode")
+            Text("color")
             VStack(alignment: .leading){
                 HStack{
                     Spacer()
                     Toggle(isOn: $lightMode) {
-                        Text("Toggle Light/Dark mode")
+                        Text("toggleTextColor")
                     }
                     Spacer()
                 }
                 .frame(width: 330.0, height: 80.0)
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
-                if(lightMode){Text("Selected: Light")}else{Text("Selected: Dark")}
-                
+                HStack{
+                    if(lightMode){
+                        Text("selected");Text(":");Text("light")
+                        
+                    }else{
+                        Text("selected");Text(":");Text("dark")
+                        
+                    }
+                }
             }
             Spacer()
         }
