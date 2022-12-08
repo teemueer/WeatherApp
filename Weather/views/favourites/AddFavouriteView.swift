@@ -20,7 +20,7 @@ struct AddFavouriteView: View {
                 
                 HStack {
                     Spacer()
-                    Button("Submit") {
+                    Button("addFav") {
                         DataController().addFavourite(place: place, context: managedObjContext)
                         dismiss()
                     }

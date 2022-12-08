@@ -9,10 +9,12 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @AppStorage("selectedUnit") private var selectedUnit = 0
+    @AppStorage("activeTheme") private var activeTheme = false
+    
+    
+    
     @State var lightMode:Bool = false
-    @State var selectedC: Bool = false
-    @State var selectedF: Bool = false
-    @State var selectedK: Bool = false
     @State var selectedText:String = "Celsius"
     @State var color: Color = .white
     
@@ -44,43 +46,36 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("℃")
-                        
                     }
                     .frame(width: 60.0, height: 60.0)
-                    .background(color)
+                    .background(selectedUnit == 0 ? .blue : .white)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        if(!selectedC){
-                            selectedC.toggle()
-                            selectedText = "Celsius"
-                            color = .blue
-                            if(selectedK){selectedK.toggle()};if(selectedF){selectedF.toggle()}
-                        }
+                        UserDefaults.standard.set(0, forKey: "selectedUnit")
+                        print(selectedUnit)
                     }
                     Spacer()
+                    
                     ZStack{
                         Text("℉")
                     }
                     .frame(width: 60.0, height: 60.0)
-                    .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
+                    .background(selectedUnit == 1 ? .blue : .white)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        if(!selectedF){
-                            selectedF.toggle()
-                            selectedText = "Fahrenheit"
-                            color = .blue
-                            if(selectedK){selectedK.toggle()};if(selectedC){selectedC.toggle()}
-                        }
+                        UserDefaults.standard.set(1, forKey: "selectedUnit")
                     }
                     Spacer()
+                    
                     ZStack{
                         Text("K")
                     }
                     .frame(width: 60.0, height: 60.0)
-                    .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
+                    .background(selectedUnit == 2 ? .blue : .white)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+                        UserDefaults.standard.set(2, forKey: "selectedUnit")
+
                     }
                     
                     Spacer()
@@ -91,10 +86,21 @@ struct SettingsView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 HStack{
-                    Text("selected");Text(":\(selectedText)")
+                    switch selectedUnit{
+                    case 0:
+                        Text("selected");Text("Celsius")
+                    case 1:
+                        Text("selected");Text("Fahrenheit")
+                    case 2:
+                        Text("selected");Text("Kelvin")
+                    default:
+                        Text("selected");Text("nil")
+                    }
+                    
                 }
                 }
-            
+            Spacer()
+                .frame(height: 35.0)
             //Color mode
             Text("color")
             VStack(alignment: .leading){
@@ -109,11 +115,11 @@ struct SettingsView: View {
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 HStack{
-                    if(lightMode){
-                        Text("selected");Text(":");Text("light")
+                    if(!lightMode){
+                        Text("selected");Text("light")
                         
                     }else{
-                        Text("selected");Text(":");Text("dark")
+                        Text("selected");Text("dark")
                         
                     }
                 }

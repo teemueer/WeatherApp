@@ -18,7 +18,7 @@
 "unit" = "Mittayksikkö";
 "color" = "Teema";
 "privacy" = "Yksityisyys";
-"selected" = "Valittu";
+"selected" = "Valittu:";
 "dark" = "Tumma";
 "light" = "Vaalea";
 "toggleTextColor" = "Valitse Tumma tai Vaalea teema";

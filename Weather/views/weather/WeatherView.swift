@@ -15,11 +15,12 @@ struct Location: Identifiable {
 
 struct WeatherView: View {
     @EnvironmentObject var fmi: FMI
-
+    @AppStorage("selectedUnit") private var selectedUnit = 0
     @StateObject var speechRecognition = SpeechRecognizer()
     @State private var isRecording:Bool = false
     @State private var transcript: String = ""
     @StateObject var geolocation = geolocate()
+    var unitConvert = unitConverter()
     
     
     // Created a map with a starting point @ Karamalmi, Espoo
@@ -65,10 +66,27 @@ struct WeatherView: View {
                         .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     
                     HStack(alignment: .bottom){
-                        Text(String(format: "%.1f°C", fmi.data[0].temperature!))
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color.white)
+                        switch selectedUnit{
+                        case 1:
+                            Text(String(format:"%.1f°F"
+                                        , unitConvert.convertUnits(unit: fmi.data[0].temperature!
+                                        , state:selectedUnit)))
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                        case 2:
+                            Text(String(format:"%.1fK"
+                                        , unitConvert.convertUnits(unit: fmi.data[0].temperature!
+                                        , state:selectedUnit)))
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                        default:
+                            Text(String(format:"%.1f°C",fmi.data[0].temperature!))
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                        }
                         Spacer()
                             .frame(width: 30.0)
                         Image(systemName: fmi.data[0].symbol!)
@@ -105,7 +123,18 @@ struct WeatherView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 40.0, height: 40)
-                                    Text(String(format: "%.1f°C", fmi.data[i].temperature!))
+                                    switch selectedUnit{
+                                    case 1:
+                                        Text(String(format:"%.1f°F"
+                                                    , unitConvert.convertUnits(unit: fmi.data[0].temperature!
+                                                    , state:selectedUnit)))
+                                    case 2:
+                                        Text(String(format:"%.1fK"
+                                                    , unitConvert.convertUnits(unit: fmi.data[0].temperature!
+                                                    , state:selectedUnit)))
+                                    default:
+                                        Text(String(format: "%.1f°C", fmi.data[i].temperature!))
+                                    }
                                 }
                                 .frame(width: 80.0, height: 150.0)
                                 .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)

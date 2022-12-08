@@ -19,7 +19,7 @@
 "unit" = "Unit Of Measurement";
 "color" = "Theme";
 "privacy" = "Privacy";
-"selected" = "Selected";
+"selected" = "Selected:";
 "dark" = "Dark";
 "light" = "Light";
 "toggleTextColor" = "Toggle between light and dark mode";
@@ -28,7 +28,7 @@
 
 //Favorites
 "favor" = "Favorite";
-"addFav" = "Add Favorite";
+"addFav" = "Add";
 
 
 //Experimental
