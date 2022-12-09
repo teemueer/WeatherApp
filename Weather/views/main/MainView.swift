@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var fmi: FMI
     
+    
     var body: some View {
         if fmi.data.count == 0 {
             ProgressView()

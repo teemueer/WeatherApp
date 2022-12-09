@@ -13,7 +13,7 @@ import MapKit
 class geolocate: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.22408, longitude: 24.75852),
                                                   span: MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005))
-    @Published var currentCity = "Helsinki"
+    @Published var currentCity = ""
     var fmi = FMI()
     var locationManager: CLLocationManager?
     let geoCoder = CLGeocoder()
@@ -63,14 +63,39 @@ class geolocate: NSObject, ObservableObject, CLLocationManagerDelegate {
             
             placemarks, error -> Void in
             guard let placemark = placemarks?.first else {return}
+            /*
+            if let city = placemark.locality{
+                print(fmi.place)
+                fmi.place = city
+                currentCity = city
+                print("Did this work? \(fmi.place)")
+            }*/
             
             if let city = placemark.subLocality{
                 print(fmi.place)
                 fmi.place = city
+                currentCity = city
                 print("Did this work? \(fmi.place)")
                 
             }
             
+            
+        })
+    }
+    
+    func nameToCoordinates(location:String){
+        geoCoder.geocodeAddressString(location, completionHandler: { [self]
+            
+            placemarks, error -> Void in
+            guard let placemark = placemarks?.first else {return}
+            let coords = placemark.location!.coordinate
+            print("lat \(coords.latitude)")
+            print("long \(coords.longitude)")
+            
+            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coords.latitude, longitude: (coords.longitude - 0.0050)), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+            
+            fmi.place = location
+            currentCity = location
             
         })
     }

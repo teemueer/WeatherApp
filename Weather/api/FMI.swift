@@ -11,7 +11,7 @@ import Combine
 class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
     private var fmiParser = FMIParser()
-    @Published var place: String = "Rovaniemi"
+    @Published var place: String = "Helsinki"
     @Published var data: [WeatherStatus] = []
     
     var subscriptions = Set<AnyCancellable>()
@@ -24,7 +24,7 @@ class FMI: ObservableObject {
 
     func getForecast() {
         var url = URL(string: baseUrl)
-        
+        print(place)
         let parametersString = Identifier.allCases.map({$0.rawValue}).joined(separator: ",")
         
         url?.append(queryItems: [
