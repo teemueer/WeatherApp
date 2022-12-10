@@ -13,7 +13,6 @@ struct FavouriteView: View {
     
     @EnvironmentObject var fmi: FMI
     
-    @State private var readyToNavigate = false
     @State private var showingAddView = false
     
     var body: some View {

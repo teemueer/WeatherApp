@@ -23,9 +23,13 @@ struct MainView: View {
                     .tabItem { Image(systemName: "list.dash").imageScale(.large) }
                     .tag(1)
                 
+                CalendarView()
+                    .tabItem { Image(systemName: "calendar").imageScale(.large) }
+                    .tag(2)
+                
                 SettingsView()
                     .tabItem { Image(systemName: "gear").imageScale(.large) }
-                    .tag(2)
+                    .tag(3)
             }
         }
     }

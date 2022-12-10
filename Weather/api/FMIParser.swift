@@ -101,13 +101,15 @@ class FMIParser: NSObject, XMLParserDelegate {
 
 func GetSymbol(_ value: Float) -> String {
     switch value {
+    case 1.0:
+        return "sun.fill"
     case 2.0:
         return "cloud.sun.fill"
     case 3.0:
         return "cloud.fill"
     case 31.0:
         return "cloud.rain.fill"
-    case 51.0, 52.0:
+    case 51.0, 52.0, 53.0:
         return "cloud.snow.fill"
     default:
         print("unknown value: \(value)")

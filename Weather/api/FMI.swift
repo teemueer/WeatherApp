@@ -10,7 +10,6 @@ import Combine
 
 class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
-    private var fmiParser = FMIParser()
     
     @Published var data: [String: [WeatherStatus]] = [:]
     
@@ -43,11 +42,12 @@ class FMI: ObservableObject {
             }
             
             let parser = XMLParser(data: data)
-            parser.delegate = self.fmiParser
+            let fmiParser = FMIParser()
+            parser.delegate = fmiParser
             parser.parse()
             
             DispatchQueue.main.async {
-                self.data[place] = self.fmiParser.data
+                self.data[place] = fmiParser.data
             }
         }
         task.resume()
