@@ -7,31 +7,23 @@
 import MapKit
 import SwiftUI
 
-struct Location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate:CLLocationCoordinate2D
-}
+
 
 struct WeatherView: View {
-    @EnvironmentObject var fmi: FMI
     
     var place: String
     
+    @EnvironmentObject var fmi: FMI
+    @AppStorage("selectedUnit") private var selectedUnit = 0
     @StateObject var speechRecognition = SpeechRecognizer()
     @State private var isRecording:Bool = false
-    @State private var transcript: String = ""
+    @State private var searchBar: String = ""
+    @StateObject var geolocation = geolocate()
+    @State private var searchStatus:Bool = false
+    private var searchFieldIsFocused: Bool = false
+    var unitConvert = unitConverter()
     
-    // Created a map with a starting point @ Karamalmi, Espoo
-    // TODO: Get location from device on startup and ask for
-    //weather query
-    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.224, longitude: 24.70), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.005))
-    
-    //Hardcoded locations as a test.
-    let locations = [
-        Location(name: "Home", coordinate: CLLocationCoordinate2D(latitude: 60.182, longitude: 24.8)),
-        Location(name: "Metropolia", coordinate: CLLocationCoordinate2D(latitude: 60.22412, longitude: 24.75860))
-    ]
+
     
     init(place: String) {
         self.place = place
@@ -42,42 +34,86 @@ struct WeatherView: View {
             ProgressView()
         } else if let data = fmi.data[place] {
             VStack {
-                // Stack with map and current weather
-                ZStack() {
-                    Map(coordinateRegion: $mapRegion, annotationItems: locations){
-                        location in
-                        MapAnnotation(coordinate: location.coordinate){
-                            VStack{
-                                Text(location.name)
-                                Circle()
-                                    .stroke(.red,lineWidth: 2)
-                                    .frame(width: 20,height: 20)
-                                    .onTapGesture {
-                                        print("tapped on \(location.name)")
-                                    }
+                
+                HStack {
+                    Spacer()
+                    Image(systemName: "mic.circle")
+                        .imageScale(.large)
+                        .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            isRecording.toggle()
+                            if(isRecording){
+                                speechRecognition.reset()
+                                speechRecognition.transcribe()
+                                print("Started transcribing!")
+                            } else {
+                                speechRecognition.stopTranscribing()
+                                print("Stopped transcribing!")
+                                print(speechRecognition.transcript)
+                                searchBar = speechRecognition.transcript
                             }
                         }
-                    }
+                    TextField("Search", text: $searchBar)
+                        .padding(20.0)
+                        .frame(width: 200.0, height: 25.0)
+                        .textFieldStyle(.roundedBorder)
+                    
+                    
+                    Image(systemName:"magnifyingglass")
+                        .onTapGesture {
+                            geolocation.nameToCoordinates(location: searchBar)
+                        }
+                    
+                    
+                    
+                    Spacer()
+                }
+                
+                // Stack with map and current weather
+                ZStack() {
+                    Map(coordinateRegion: $geolocation.mapRegion,showsUserLocation: true)
+                        .ignoresSafeArea()
+                        .accentColor(Color(.systemBlue))
+                        .onAppear{
+                            geolocation.checkLocationServices()
+                        }
                     
                     RoundedRectangle(cornerRadius: 20)
                         .frame(width: 220.0)
                         .opacity(0.85)
-                        .offset(x: -65.0, y: 0.0)
+                        .offset(x: /*@START_MENU_TOKEN@*/-65.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     
                     VStack{
-                        Text(place)
+                        Text(geolocation.currentCity)
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.white)
                             .multilineTextAlignment(.center)
-                            .hoverEffect(.lift)
-                            .shadow(radius: 10)
+                            .hoverEffect(/*@START_MENU_TOKEN@*/.lift/*@END_MENU_TOKEN@*/)
+                            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                         
                         HStack(alignment: .bottom){
-                            Text(String(format: "%.1f°C", data[0].temperature!))
+                            switch selectedUnit{
+                            case 1:
+                                Text(String(format:"%.1f°F"
+                                            , unitConvert.convertUnits(unit: data[0].temperature!
+                                                                       , state:selectedUnit)))
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.white)
+                            case 2:
+                                Text(String(format:"%.1fK"
+                                            , unitConvert.convertUnits(unit: data[0].temperature!
+                                                                       , state:selectedUnit)))
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                            default:
+                                Text(String(format:"%.1f°C",data[0].temperature!))
+                                    .font(.largeTitle)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.white)
+                            }
                             Spacer()
                                 .frame(width: 30.0)
                             Image(systemName: data[0].symbol!)
@@ -91,15 +127,16 @@ struct WeatherView: View {
                         .frame(width: 200.0)
                         
                     }
-                    .offset(x: -65.0, y: 0.0)
+                    .offset(x: /*@START_MENU_TOKEN@*/-65.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     .padding()
                     
                 }
                 .frame(width: 350.0, height: 180.0)
                 .cornerRadius(20)
-                .shadow(radius: 10)
+                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 Spacer()
                     .frame(height: 30.0)
+                
                 
                 // Forecast section with scrollview
                 VStack(){
@@ -132,8 +169,8 @@ struct WeatherView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 
+                
                 HStack{
-                    
                     ZStack{
                         Text(String(format: "%.1f m/s", data[0].windSpeed!))
                     }

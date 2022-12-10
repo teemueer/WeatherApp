@@ -11,7 +11,7 @@ import Combine
 class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
     
-    @Published var data: [String: [WeatherStatus]] = [:]
+     @Published var data: [String: [WeatherStatus]] = [:]
     
     init() {
         getForecast(place: "Espoo")
