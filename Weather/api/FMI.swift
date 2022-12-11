@@ -12,6 +12,7 @@ class FMI: ObservableObject {
     
      @Published var loc: String = "Espoo"
      @Published var data: [String: [WeatherStatus]] = [:]
+
      
     
     init() {

@@ -15,6 +15,10 @@ class WeatherStatus: Identifiable, ObservableObject {
     var symbol: String?
     var windDirection: Float?
     var windSpeed: Float?
+    var totalCloudCover: Float?
+    //var percipitationAmount: Float?
+    //var percipitation1h: Float?
+    
     
     init(date: Date?) {
         self.date = date
@@ -33,6 +37,10 @@ enum Identifier: String, CaseIterable {
     case WeatherSymbol3
     case WindDirection
     case WindSpeedMS
+    case TotalCloudCover
+    //case PercipitationAmount
+    //case Percipitation1h
+
 }
 
 class FMIParser: NSObject, XMLParserDelegate {
@@ -93,6 +101,16 @@ class FMIParser: NSObject, XMLParserDelegate {
             weatherStatus?.windDirection = value
         case .WindSpeedMS:
             weatherStatus?.windSpeed = value
+
+        case .TotalCloudCover:
+            weatherStatus?.totalCloudCover = value
+            
+        //case .PercipitationAmount:
+        //    weatherStatus?.percipitationAmount = value
+        //case .Percipitation1h:
+         //   weatherStatus?.percipitation1h = value
+            
+            
         default:
             break
         }

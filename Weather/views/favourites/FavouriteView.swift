@@ -23,7 +23,8 @@ struct FavouriteView: View {
                         if fmi.data[fav.place!] != nil && fmi.data[fav.place!]!.count > 0 {
                             NavigationLink {
                                 //Doesnt take arguments anymore WeatherVIew(place:)
-                                WeatherView()
+                                //WeatherView()
+                                FavouriteDataView(place: fav.place!)
                             } label : {
                                 FavouriteRowView(place: fav.place!, data: fmi.data[fav.place!]!)
                             }
