@@ -15,7 +15,6 @@ struct WeatherApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(fmi)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

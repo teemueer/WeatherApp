@@ -65,16 +65,22 @@ class geolocate: NSObject, ObservableObject, CLLocationManagerDelegate {
             guard let placemark = placemarks?.first else {return}
             
             if let city = placemark.locality{
-                
-                fmi.getForecast(place: city)
-                currentCity = city
+                if let city2 = placemark.subLocality{
+                    fmi.getForecast(place: city)
+                    currentCity = city2
+                    fmi.loc = city2
+                    print(city2)
+                    
+                } else {
+                    fmi.getForecast(place: city)
+                    currentCity = city
+                    fmi.loc = city
+                    print(city)
+                    print(fmi.loc)
+                }
             }
             
-            if let city = placemark.subLocality{
-                fmi.getForecast(place: city)
-                currentCity = city
-                
-            }
+
             
             
         })
@@ -90,8 +96,9 @@ class geolocate: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("long \(coords.longitude)")
             
             mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coords.latitude, longitude: (coords.longitude - 0.0050)), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-            
-            fmi.getForecast(place: location)
+            fmi.objectWillChange.send()
+            //fmi.getForecast(place: location)
+            //fmi.loc = location
             currentCity = location
             
         })

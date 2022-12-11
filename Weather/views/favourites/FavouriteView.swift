@@ -2,7 +2,7 @@
 //  FavoritesView.swift
 //  Weather
 //
-//  Created by iosdev on 5.12.2022.
+//  Created by Teemu on 5.12.2022.
 //
 
 import SwiftUI
@@ -22,7 +22,8 @@ struct FavouriteView: View {
                     ForEach(favourites) { fav in
                         if fmi.data[fav.place!] != nil {
                             NavigationLink {
-                                WeatherView(place: fav.place!)
+                                //Doesnt take arguments anymore WeatherVIew(place:)
+                                WeatherView()
                             } label : {
                                 FavouriteRowView(place: fav.place!, data: fmi.data[fav.place!]!)
                             }

@@ -1,39 +1,41 @@
 //
-//  BetaMainView.swift
-//  Weather
+//  ContentView.swift
+//  TestEnvironment
 //
-//  Created by Juho on 1.12.2022.
+//  Created by Teemu/Juho on 10.12.2022.
 //
-import MapKit
+
 import SwiftUI
-
-
+import Foundation
+import MapKit
 
 struct WeatherView: View {
     
-    var place: String
-    
-    @EnvironmentObject var fmi: FMI
+    @StateObject var fmi = FMI()
+    @StateObject var geolocation = geolocate()
     @AppStorage("selectedUnit") private var selectedUnit = 0
     @StateObject var speechRecognition = SpeechRecognizer()
     @State private var isRecording:Bool = false
     @State private var searchBar: String = ""
-    @StateObject var geolocation = geolocate()
-    @State private var searchStatus:Bool = false
-    private var searchFieldIsFocused: Bool = false
     var unitConvert = unitConverter()
     
-
-    
-    init(place: String) {
-        self.place = place
-    }
-    
     var body: some View {
-        if fmi.data[place] == nil {
+        if fmi.data[fmi.loc] == nil {
             ProgressView()
-        } else if let data = fmi.data[place] {
-            VStack {
+        } else if let data = fmi.data[fmi.loc] {
+            
+            VStack{
+                Text(fmi.loc)
+                Text(String(data[0].temperature!))
+                Button("Rovaniemi", action: {
+                    geolocation.nameToCoordinates(location: "Rovaniemi")
+                    fmi.getForecast(place: "Rovaniemi")
+                    
+                })
+                Button("Tapiola", action: {
+                    geolocation.nameToCoordinates(location: "Tapiola")
+                    fmi.getForecast(place: "Tapiola")
+                })
                 
                 HStack {
                     Spacer()
@@ -62,6 +64,7 @@ struct WeatherView: View {
                     Image(systemName:"magnifyingglass")
                         .onTapGesture {
                             geolocation.nameToCoordinates(location: searchBar)
+                            fmi.getForecast(place: searchBar)
                         }
                     
                     
@@ -69,7 +72,7 @@ struct WeatherView: View {
                     Spacer()
                 }
                 
-                // Stack with map and current weather
+                //Stack with map + location info + current weather
                 ZStack() {
                     Map(coordinateRegion: $geolocation.mapRegion,showsUserLocation: true)
                         .ignoresSafeArea()
@@ -84,6 +87,7 @@ struct WeatherView: View {
                         .offset(x: /*@START_MENU_TOKEN@*/-65.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     
                     VStack{
+                        //Use fmi.loc if geolocation.currentCity doesnt work!
                         Text(geolocation.currentCity)
                             .font(.title)
                             .fontWeight(.semibold)
@@ -137,8 +141,7 @@ struct WeatherView: View {
                 Spacer()
                     .frame(height: 30.0)
                 
-                
-                // Forecast section with scrollview
+                //Horizontal scroll weather forecast
                 VStack(){
                     ScrollView(.horizontal, showsIndicators: false) {
                         VStack{
@@ -151,7 +154,19 @@ struct WeatherView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 40.0, height: 40)
-                                        Text(String(format: "%.1f°C", data[i].temperature!))
+                                        switch selectedUnit{
+                                        case 1:
+                                            Text(String(format:"%.1f°F"
+                                                        , unitConvert.convertUnits(unit: data[i].temperature!
+                                                                                   , state:selectedUnit)))
+                                        case 2:
+                                            Text(String(format:"%.1fK"
+                                                        , unitConvert.convertUnits(unit: data[i].temperature!
+                                                                                   , state:selectedUnit)))
+                                        default:
+                                            Text(String(format: "%.1f°C", data[i].temperature!))
+                                        }
+                                        
                                     }
                                     .frame(width: 80.0, height: 150.0)
                                     .cornerRadius(10.0)
@@ -169,7 +184,6 @@ struct WeatherView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 
-                
                 HStack{
                     ZStack{
                         Text(String(format: "%.1f m/s", data[0].windSpeed!))
@@ -184,12 +198,16 @@ struct WeatherView: View {
                     .frame(width: 170.0, height: 150.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
-                    
-                    
-                }.padding().frame(width: 350.0, height: 200)
+                }
                 
-                Spacer()
+                
             }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeatherView()
     }
 }

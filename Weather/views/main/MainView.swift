@@ -1,27 +1,31 @@
 //
-//  ContentView.swift
-//  Weather
+//  MainView.swift
+//  TestEnvironment
 //
-//  Created by iosdev on 5.12.2022.
+//  Created by iosdev on 10.12.2022.
 //
 
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var fmi: FMI
+   
+    @StateObject var fmi = FMI()
     
     var body: some View {
         if fmi.data.count == 0 {
             ProgressView()
         } else {
             TabView {
-                WeatherView(place: "Espoo")
+                
+
+                WeatherView()
                     .tabItem { Image(systemName: "house").imageScale(.large) }
                     .tag(1)
-
+                
                 FavouriteView()
                     .tabItem { Image(systemName: "list.dash").imageScale(.large) }
                     .tag(1)
+                 
                 
                 CalendarView()
                     .tabItem { Image(systemName: "calendar").imageScale(.large) }
@@ -30,8 +34,14 @@ struct MainView: View {
                 SettingsView()
                     .tabItem { Image(systemName: "gear").imageScale(.large) }
                     .tag(3)
+ 
             }
         }
     }
 }
 
+struct MainView_Previews: PreviewProvider{
+    static var previews: some View {
+        MainView()
+    }
+}

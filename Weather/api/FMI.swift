@@ -1,17 +1,18 @@
 //
 //  FMI.swift
-//  Weather
+//  TestEnvironment
 //
-//  Created by iosdev on 28.11.2022.
+//  Created by Teemu on 10.12.2022.
 //
 
 import Foundation
-import Combine
 
 class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
     
+     @Published var loc: String = "Espoo"
      @Published var data: [String: [WeatherStatus]] = [:]
+     
     
     init() {
         getForecast(place: "Espoo")
@@ -48,6 +49,7 @@ class FMI: ObservableObject {
             
             DispatchQueue.main.async {
                 self.data[place] = fmiParser.data
+                self.loc = place
             }
         }
         task.resume()

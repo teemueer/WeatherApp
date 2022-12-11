@@ -23,20 +23,13 @@ struct SettingsView: View {
             //Header
             HStack(alignment: .center){
                 Spacer()
-                Image(systemName: "arrow.backward")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30.0, height: 30)
-                    Spacer()
                 Text("settings")
                     .font(.title)
                     .fontWeight(.bold)
                 Spacer()
-            }.padding(.trailing, 90)
+            }
             Divider()
-
-            
+    
             //Settings begin here
             
             //Unit of measurement
