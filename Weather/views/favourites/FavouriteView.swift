@@ -20,7 +20,7 @@ struct FavouriteView: View {
             VStack(alignment: .leading) {
                 List {
                     ForEach(favourites) { fav in
-                        if fmi.data[fav.place!] != nil {
+                        if fmi.data[fav.place!] != nil && fmi.data[fav.place!]!.count > 0 {
                             NavigationLink {
                                 //Doesnt take arguments anymore WeatherVIew(place:)
                                 WeatherView()
