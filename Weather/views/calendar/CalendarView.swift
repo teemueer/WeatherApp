@@ -30,7 +30,9 @@ struct CalendarView: View {
         List {
             ForEach(calendarEvents) { e in
                 if let weather = fmi.data[e.place] {
-                    CalendarRowView(calendarEvent: e, weather: weather)
+                    if weather.count > 0 {
+                        CalendarRowView(calendarEvent: e, weather: weather)
+                    }
                 }
             }
         }
