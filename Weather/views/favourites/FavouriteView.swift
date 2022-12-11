@@ -11,7 +11,7 @@ struct FavouriteView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.place)]) var favourites: FetchedResults<Favourite>
     
-    @EnvironmentObject var fmi: FMI
+    @StateObject var fmi = FMI()
     
     @State private var showingAddView = false
     

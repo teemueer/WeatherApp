@@ -22,7 +22,7 @@ class CalendarEvent: Identifiable, ObservableObject {
 }
 
 struct CalendarView: View {
-    @EnvironmentObject var fmi: FMI
+    @StateObject var fmi = FMI()
     let eventStore = EKEventStore()
     @State var calendarEvents: [CalendarEvent] = []
     

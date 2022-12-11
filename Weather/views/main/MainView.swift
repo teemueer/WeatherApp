@@ -8,40 +8,26 @@
 import SwiftUI
 
 struct MainView: View {
-   
-    @StateObject var fmi = FMI()
-    
     var body: some View {
-        if fmi.data.count == 0 {
-            ProgressView()
-        } else {
-            TabView {
-                
+        TabView {
+            WeatherView()
+                .tabItem { Image(systemName: "house").imageScale(.large) }
+                .tag(1)
+            
+            FavouriteView()
+                .tabItem { Image(systemName: "list.dash").imageScale(.large) }
+                .tag(2)
+             
+            
+            CalendarView()
+                .tabItem { Image(systemName: "calendar").imageScale(.large) }
+                .tag(3)
+            
+            SettingsView()
+                .tabItem { Image(systemName: "gear").imageScale(.large) }
+                .tag(4)
 
-                WeatherView()
-                    .tabItem { Image(systemName: "house").imageScale(.large) }
-                    .tag(1)
-                
-                FavouriteView()
-                    .tabItem { Image(systemName: "list.dash").imageScale(.large) }
-                    .tag(1)
-                 
-                
-                CalendarView()
-                    .tabItem { Image(systemName: "calendar").imageScale(.large) }
-                    .tag(2)
-                
-                SettingsView()
-                    .tabItem { Image(systemName: "gear").imageScale(.large) }
-                    .tag(3)
- 
-            }
         }
     }
 }
 
-struct MainView_Previews: PreviewProvider{
-    static var previews: some View {
-        MainView()
-    }
-}
