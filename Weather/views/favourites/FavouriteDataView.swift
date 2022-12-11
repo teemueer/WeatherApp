@@ -144,14 +144,42 @@ struct FavouriteDataView: View {
                 
                 HStack{
                     ZStack{
-                        Text(String(format: "%.1f m/s", data[0].windSpeed!))
+                        VStack{
+                            Text("Cloud")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                            Text("Coverage")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                            Spacer()
+                                .frame(height: 5.5)
+                            Text(String(format: "%.0f %%",data[0].totalCloudCover!))
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                            Spacer()
+                        }.padding()
                     }
                     .frame(width: 170.0, height: 150.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     
                     ZStack{
-                        
+                        VStack{
+                            Text("Humidity")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                            Spacer()
+                                .frame(height: 25.0)
+                            Text(String(format: "%.1f %%",data[0].humidity!))
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.white)
+                            Spacer()
+                        }.padding()
                     }
                     .frame(width: 170.0, height: 150.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
