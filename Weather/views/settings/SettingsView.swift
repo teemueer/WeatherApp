@@ -17,7 +17,7 @@ struct SettingsView: View {
     @State var color: Color = .white
     
     var body: some View {
-        VStack{
+        VStack(){
             //Header
             HStack(alignment: .center){
                 Spacer()
@@ -44,10 +44,10 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("℃")
-                        
+                            .foregroundColor(Theme.textcolor.mainColor)
                     }
                     .frame(width: 60.0, height: 60.0)
-                    .background(color)
+                    .background(Theme.testcolor.mainColor)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
                         if(!selectedC){
@@ -60,6 +60,7 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("℉")
+                        .foregroundColor(Theme.textcolor.mainColor)
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
@@ -75,6 +76,7 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("K")
+                        .foregroundColor(Theme.textcolor.mainColor)
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
@@ -87,13 +89,13 @@ struct SettingsView: View {
                     
                 }
                 .frame(width: 330.0, height: 80.0)
-                .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                .background(Theme.yellow.mainColor)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 HStack{
                     Text("selected");Text(":\(selectedText)")
                 }
-                }
+            }
             
             //Color mode
             Text("color")
@@ -106,7 +108,7 @@ struct SettingsView: View {
                     Spacer()
                 }
                 .frame(width: 330.0, height: 80.0)
-                .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
+                .background(Theme.yellow.mainColor)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 HStack{
                     if(lightMode){
@@ -119,7 +121,7 @@ struct SettingsView: View {
                 }
             }
             Spacer()
-        }
+        }.background(Theme.primarytheme.mainColor)
     }
 }
 
