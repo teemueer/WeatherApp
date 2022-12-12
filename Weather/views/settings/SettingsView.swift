@@ -26,14 +26,14 @@ struct SettingsView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30.0, height: 30)
-                    Spacer()
+                Spacer()
                 Text("settings")
                     .font(.title)
                     .fontWeight(.bold)
                 Spacer()
             }.padding(.trailing, 90)
             Divider()
-
+            
             
             //Settings begin here
             
@@ -60,7 +60,7 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("℉")
-                        .foregroundColor(Theme.textcolor.mainColor)
+                            .foregroundColor(Theme.textcolor.mainColor)
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
@@ -76,7 +76,7 @@ struct SettingsView: View {
                     Spacer()
                     ZStack{
                         Text("K")
-                        .foregroundColor(Theme.textcolor.mainColor)
+                            .foregroundColor(Theme.textcolor.mainColor)
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.white/*@END_MENU_TOKEN@*/)
@@ -93,37 +93,17 @@ struct SettingsView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 HStack{
-                    Text("selected");Text(":\(selectedText)")
-                }
+                    Text("selected");Text("\(selectedText)")
+                }.padding(16.0)
             }
             
             //Color mode
-            Text("color")
-            VStack(alignment: .leading){
-                HStack{
-                    Spacer()
-                    Toggle(isOn: $lightMode) {
-                        Text("toggleTextColor")
-                    }
-                    Spacer()
-                }
-                .frame(width: 330.0, height: 80.0)
-                .background(Theme.yellow.mainColor)
-                .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
-                HStack{
-                    if(lightMode){
-                        Text("selected");Text(":");Text("light")
-                        
-                    }else{
-                        Text("selected");Text(":");Text("dark")
-                        
-                    }
-                }
-            }
+            
             Spacer()
         }.background(Theme.primarytheme.mainColor)
     }
 }
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
