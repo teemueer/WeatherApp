@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherStatus: Identifiable {
+class WeatherStatus: Identifiable, ObservableObject {
     let id = UUID()
     var date: Date?
     var humidity: Float?
@@ -15,6 +15,10 @@ class WeatherStatus: Identifiable {
     var symbol: String?
     var windDirection: Float?
     var windSpeed: Float?
+    var totalCloudCover: Float?
+    //var percipitationAmount: Float?
+    //var percipitation1h: Float?
+    
     
     init(date: Date?) {
         self.date = date
@@ -33,6 +37,10 @@ enum Identifier: String, CaseIterable {
     case WeatherSymbol3
     case WindDirection
     case WindSpeedMS
+    case TotalCloudCover
+    //case PercipitationAmount
+    //case Percipitation1h
+
 }
 
 class FMIParser: NSObject, XMLParserDelegate {
@@ -88,11 +96,21 @@ class FMIParser: NSObject, XMLParserDelegate {
         case .Temperature:
             weatherStatus?.temperature = value
         case .WeatherSymbol3:
-            weatherStatus?.symbol = GetSymbol(value!)
+            weatherStatus?.symbol = "\(Int(value!))"
         case .WindDirection:
             weatherStatus?.windDirection = value
         case .WindSpeedMS:
             weatherStatus?.windSpeed = value
+
+        case .TotalCloudCover:
+            weatherStatus?.totalCloudCover = value
+            
+        //case .PercipitationAmount:
+        //    weatherStatus?.percipitationAmount = value
+        //case .Percipitation1h:
+         //   weatherStatus?.percipitation1h = value
+            
+            
         default:
             break
         }
@@ -101,13 +119,15 @@ class FMIParser: NSObject, XMLParserDelegate {
 
 func GetSymbol(_ value: Float) -> String {
     switch value {
+    case 1.0:
+        return "sun.fill"
     case 2.0:
         return "cloud.sun.fill"
     case 3.0:
         return "cloud.fill"
     case 31.0:
         return "cloud.rain.fill"
-    case 51.0, 52.0:
+    case 51.0, 52.0, 53.0:
         return "cloud.snow.fill"
     default:
         print("unknown value: \(value)")

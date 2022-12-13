@@ -1,0 +1,37 @@
+/*
+  Localizable.strings
+  Weather
+
+  Created by iosdev on 7.12.2022.
+  
+*/
+
+//Main
+"hForecast" = "Sääennuste";
+"statWind" = "Tuulennopeus";
+"statRain" = "Sademäärä";
+
+
+
+//Settings
+"settings" = "Asetukset";
+"unit" = "Mittayksikkö";
+"color" = "Teema";
+"privacy" = "Yksityisyys";
+"selected" = "Valittu:";
+"dark" = "Tumma";
+"light" = "Vaalea";
+"toggleTextColor" = "Valitse Tumma tai Vaalea teema";
+"privacyNote" = "Huomio: Yksityisyys asetuksien muuttaminen saattaa vaikuttaa sovelluksen toimintaan";
+
+
+//Favorites
+"favor" = "Suosikit";
+"addFav" = "Lisää suosikki";
+
+
+//Experimental
+"welcome" = "Tervetuloa.";
+"morning" = "Hyvää Huomenta.";
+"noon" = "Hyvää Päivää.";
+"evening" = "Hyvää Iltaa.";

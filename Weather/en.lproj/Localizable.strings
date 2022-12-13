@@ -1,0 +1,39 @@
+/*
+  Localizable.strings
+  Weather
+
+  Created by iosdev on 7.12.2022.
+  
+*/
+
+
+//Main
+"hForecast" = "Hourly forecast";
+"statWind" = "Wind speed";
+"statRain" = "Rain amount";
+
+
+
+//Settings
+"settings" = "Settings";
+"unit" = "Unit Of Measurement";
+"color" = "Theme";
+"privacy" = "Privacy";
+"selected" = "Selected:";
+"dark" = "Dark";
+"light" = "Light";
+"toggleTextColor" = "Toggle between light and dark mode";
+"privacyNote" = "Note: Disabling some permissions can reduce the functionality of the application";
+
+
+//Favorites
+"favor" = "Favorite";
+"addFav" = "Add";
+
+
+//Experimental
+"welcome" = "Welcome.";
+"morning" = "Good Morning.";
+"noon" = "Good Day.";
+"evening" = "Good Evening.";
+

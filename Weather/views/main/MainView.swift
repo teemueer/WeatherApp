@@ -1,71 +1,32 @@
 //
-//  ContentView.swift
-//  Weather
+//  MainView.swift
+//  TestEnvironment
 //
-//  Created by iosdev on 28.11.2022.
+//  Created by iosdev on 10.12.2022.
 //
 
 import SwiftUI
 
 struct MainView: View {
-    let place: String
-    let data: [WeatherStatus]
-    
     var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [.blue, .cyan]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing)
-            .edgesIgnoringSafeArea(.all)
+        TabView {
+            WeatherView()
+                .tabItem { Image(systemName: "house").imageScale(.large) }
+                .tag(1)
             
-            VStack {
-                Text(self.place)
-                    .font(.system(size: 32, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-                    .padding()
-                
-                Image(systemName: self.data[0].symbol!)
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 150, height: 150)
-                
-                Text(String(format: "%.1f°C", self.data[0].temperature!))
-                    .font(.system(size: 30, weight: .medium))
-                    .foregroundColor(.white)
-                    .padding()
-                
-                VStack {
-                    ForEach(1..<30) { i in
-                        if i % 3 == 0 {
-                            ForecastView(status: self.data[i])
-                        }
-                    }
-                }
-            }
+            FavouriteView()
+                .tabItem { Image(systemName: "list.dash").imageScale(.large) }
+                .tag(2)
+             
             
-            Spacer()
-        }
-    }
-}
+            CalendarView()
+                .tabItem { Image(systemName: "calendar").imageScale(.large) }
+                .tag(3)
+            
+            SettingsView()
+                .tabItem { Image(systemName: "gear").imageScale(.large) }
+                .tag(4)
 
-struct ForecastView: View {
-    let status: WeatherStatus
-    
-    var body: some View {
-        HStack {
-            Text(self.status.hours)
-                .foregroundColor(.white)
-            Image(systemName: self.status.symbol!)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
-            Text(String(format: "%.1f°C", self.status.temperature!))
-                .foregroundColor(.white)
-            Text(String(format: "%.1f m/s", self.status.windSpeed!))
-                .foregroundColor(.white)
         }
     }
 }

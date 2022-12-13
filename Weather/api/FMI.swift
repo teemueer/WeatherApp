@@ -1,27 +1,25 @@
 //
 //  FMI.swift
-//  Weather
+//  TestEnvironment
 //
-//  Created by iosdev on 28.11.2022.
+//  Created by Teemu on 10.12.2022.
 //
 
 import Foundation
 
 class FMI: ObservableObject {
     private let baseUrl = "https://opendata.fmi.fi/wfs"
-    private var fmiParser = FMIParser()
     
-    @Published var loading = false
-    @Published var place: String?
-    @Published var data: [WeatherStatus]?
+     @Published var loc: String = "Espoo"
+     @Published var data: [String: [WeatherStatus]] = [:]
+
+     
     
     init() {
-        self.getForecast(place: "Espoo")
+        getForecast(place: "Espoo")
     }
-
+    
     func getForecast(place: String) {
-        self.loading = true
-        
         var url = URL(string: baseUrl)
         
         let parametersString = Identifier.allCases.map({$0.rawValue}).joined(separator: ",")
@@ -46,17 +44,13 @@ class FMI: ObservableObject {
             }
             
             let parser = XMLParser(data: data)
-            parser.delegate = self.fmiParser
+            let fmiParser = FMIParser()
+            parser.delegate = fmiParser
             parser.parse()
             
-            DispatchQueue.main.async {
-                self.place = place
-                self.data = self.fmiParser.data
-                self.loading = false
-                
-                self.data?.forEach { (weatherStatus) in
-                    print(weatherStatus.date, weatherStatus.symbol)
-                }
+            DispatchQueue.main.sync{
+                self.data[place] = fmiParser.data
+                self.loc = place
             }
         }
         task.resume()
