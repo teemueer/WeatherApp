@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("darkMode") private var darkMode = false
+    
     var body: some View {
         TabView {
             WeatherView()
                 .tabItem { Image(systemName: "house").imageScale(.large) }
                 .tag(1)
+                .preferredColorScheme(darkMode ? .dark : .light)
             
             FavouriteView()
                 .tabItem { Image(systemName: "list.dash").imageScale(.large) }
@@ -26,6 +29,7 @@ struct MainView: View {
             SettingsView()
                 .tabItem { Image(systemName: "gear").imageScale(.large) }
                 .tag(4)
+                .preferredColorScheme(darkMode ? .dark : .light)
 
         }
     }

@@ -18,6 +18,15 @@ struct FavouriteView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
+                HStack(alignment: .center) {
+                    Spacer()
+                    Text("favor")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                Divider()
+                
                 List {
                     ForEach(favourites) { fav in
                         if fmi.data[fav.place!] != nil && fmi.data[fav.place!]!.count > 0 {
@@ -50,7 +59,6 @@ struct FavouriteView: View {
             }.sheet(isPresented: $showingAddView) {
                 AddFavouriteView()
             }
-            .navigationTitle("favor")
         }
     }
     

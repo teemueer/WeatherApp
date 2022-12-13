@@ -19,6 +19,8 @@ struct WeatherView: View {
     @State private var searchBar: String = ""
     var unitConvert = unitConverter()
     
+    @AppStorage("darkMode") private var darkMode = false
+    
     var body: some View {
         if fmi.data[fmi.loc] == nil {
             ProgressView()
@@ -94,7 +96,7 @@ struct WeatherView: View {
                         Text(geolocation.currentCity)
                             .font(.title)
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(darkMode ? .black : .white)
                             .multilineTextAlignment(.center)
                             .hoverEffect(/*@START_MENU_TOKEN@*/.lift/*@END_MENU_TOKEN@*/)
                             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
@@ -107,19 +109,19 @@ struct WeatherView: View {
                                                                        , state:selectedUnit)))
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(darkMode ? .black : .white)
                             case 2:
                                 Text(String(format:"%.1fK"
                                             , unitConvert.convertUnits(unit: data[0].temperature!
                                                                        , state:selectedUnit)))
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(darkMode ? .black : .white)
                             default:
                                 Text(String(format:"%.1f°C",data[0].temperature!))
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(darkMode ? .black : .white)
                             }
                             Spacer()
                                 .frame(width: 30.0)
@@ -151,7 +153,7 @@ struct WeatherView: View {
                             HStack{
                                 ForEach(2..<21) { i in
                                     VStack{
-                                        Text(data[i].hours)
+                                        Text(data[i].hours).foregroundColor(.black)
                                         Image(data[i].symbol!)
                                             .renderingMode(.original)
                                             .resizable()
@@ -162,12 +164,15 @@ struct WeatherView: View {
                                             Text(String(format:"%.1f°F"
                                                         , unitConvert.convertUnits(unit: data[i].temperature!
                                                                                    , state:selectedUnit)))
+                                            .foregroundColor(.black)
                                         case 2:
                                             Text(String(format:"%.1fK"
                                                         , unitConvert.convertUnits(unit: data[i].temperature!
                                                                                    , state:selectedUnit)))
+                                            .foregroundColor(.black)
                                         default:
                                             Text(String(format: "%.1f°C", data[i].temperature!))
+                                                .foregroundColor(.black)
                                         }
                                         
                                     }

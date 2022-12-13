@@ -26,6 +26,7 @@ struct FavouriteRowView: View {
         }
         .padding(10)
         .background(.mint)
+        .foregroundColor(.black)
         .frame(maxWidth: .infinity)
         .shadow(radius: 10)
         .cornerRadius(10)

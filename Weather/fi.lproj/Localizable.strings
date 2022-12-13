@@ -35,3 +35,6 @@
 "morning" = "Hyvää Huomenta.";
 "noon" = "Hyvää Päivää.";
 "evening" = "Hyvää Iltaa.";
+
+//Calendar
+"calendar" = "Kalenteri";

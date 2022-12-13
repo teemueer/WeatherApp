@@ -27,20 +27,29 @@ struct CalendarView: View {
     @State var calendarEvents: [CalendarEvent] = []
     
     var body: some View {
-        List {
-            ForEach(calendarEvents) { e in
-                if let weather = fmi.data[e.place] {
-                    if weather.count > 0 {
-                        CalendarRowView(calendarEvent: e, weather: weather)
+        VStack {
+            HStack(alignment: .center) {
+                Spacer()
+                Text("calendar")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            Divider()
+            
+            List {
+                ForEach(calendarEvents) { e in
+                    if fmi.data[e.place] != nil && fmi.data[e.place]!.count > 0 {
+                        CalendarRowView(calendarEvent: e, weather: fmi.data[e.place]!)
                     }
                 }
             }
-        }
-        .onAppear {
-            getCalendar()
-            for e in calendarEvents {
-                if fmi.data[e.place] == nil {
-                    fmi.getForecast(place: e.place)
+            .onAppear {
+                getCalendar()
+                for e in calendarEvents {
+                    if fmi.data[e.place] == nil {
+                        fmi.getForecast(place: e.place)
+                    }
                 }
             }
         }
@@ -49,6 +58,7 @@ struct CalendarView: View {
 
 extension CalendarView {
     func getEvents() {
+        print("getting events")
         calendarEvents = []
         for calendar in eventStore.calendars(for: .event) {
             let predicate = eventStore.predicateForEvents(

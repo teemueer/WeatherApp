@@ -10,11 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     
     @AppStorage("selectedUnit") private var selectedUnit = 0
-    @AppStorage("activeTheme") private var activeTheme = false
+    @AppStorage("darkMode") private var darkMode = false
     
-    
-    
-    @State var lightMode:Bool = false
     @State var selectedText:String = "Celsius"
     @State var color: Color = .white
     
@@ -34,6 +31,7 @@ struct SettingsView: View {
             
             //Unit of measurement
             Text("unit")
+            
             VStack(alignment: .leading){
                 HStack{
                     Spacer()
@@ -42,6 +40,7 @@ struct SettingsView: View {
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(selectedUnit == 0 ? .blue : .white)
+                    .foregroundColor(.black)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
                         UserDefaults.standard.set(0, forKey: "selectedUnit")
@@ -54,6 +53,7 @@ struct SettingsView: View {
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(selectedUnit == 1 ? .blue : .white)
+                    .foregroundColor(.black)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
                         UserDefaults.standard.set(1, forKey: "selectedUnit")
@@ -65,10 +65,10 @@ struct SettingsView: View {
                     }
                     .frame(width: 60.0, height: 60.0)
                     .background(selectedUnit == 2 ? .blue : .white)
+                    .foregroundColor(.black)
                     .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
                         UserDefaults.standard.set(2, forKey: "selectedUnit")
-
                     }
                     
                     Spacer()
@@ -81,39 +81,47 @@ struct SettingsView: View {
                 HStack{
                     switch selectedUnit{
                     case 0:
-                        Text("selected");Text("Celsius")
+                        Text("selected")
+                        Text("Celsius")
                     case 1:
-                        Text("selected");Text("Fahrenheit")
+                        Text("selected")
+                        Text("Fahrenheit")
                     case 2:
-                        Text("selected");Text("Kelvin")
+                        Text("selected")
+                        Text("Kelvin")
                     default:
-                        Text("selected");Text("nil")
+                        Text("selected")
+                        Text("nil")
                     }
                     
                 }
                 }
             Spacer()
                 .frame(height: 35.0)
+            
             //Color mode
             Text("color")
+
             VStack(alignment: .leading){
                 HStack{
                     Spacer()
-                    Toggle(isOn: $lightMode) {
-                        Text("toggleTextColor")
-                    }
+                    Toggle("Dark Mode", isOn: $darkMode)
+                        .onChange(of: darkMode) { value in
+                            UserDefaults.standard.set(value, forKey: "darkMode")
+                            print(darkMode, value)
+                        }
                     Spacer()
                 }
                 .frame(width: 330.0, height: 80.0)
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.gray/*@END_MENU_TOKEN@*/)
                 .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
                 HStack{
-                    if(!lightMode){
-                        Text("selected");Text("light")
-                        
-                    }else{
-                        Text("selected");Text("dark")
-                        
+                    if (!darkMode){
+                        Text("selected")
+                        Text("light")
+                    } else {
+                        Text("selected")
+                        Text("dark")
                     }
                 }
             }

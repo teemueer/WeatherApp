@@ -46,9 +46,9 @@ struct CalendarRowView: View {
             }
         }
         .padding(10)
-        .background(.teal)
+        .background(.mint)
+        .foregroundColor(.black)
         .frame(maxWidth: .infinity)
-        .shadow(radius: 10)
         .cornerRadius(10)
     }
 }
