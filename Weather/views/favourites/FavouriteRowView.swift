@@ -16,7 +16,7 @@ struct FavouriteRowView: View {
             Text(place)
             Spacer()
             VStack(alignment: .trailing) {
-                Image(systemName: data[0].symbol!)
+                Image(data[0].symbol!)
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)

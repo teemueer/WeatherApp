@@ -37,7 +37,7 @@ struct CalendarRowView: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Image(systemName: w.symbol!)
+                Image(w.symbol!)
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)

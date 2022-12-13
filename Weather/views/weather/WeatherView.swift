@@ -123,7 +123,7 @@ struct WeatherView: View {
                             }
                             Spacer()
                                 .frame(width: 30.0)
-                            Image(systemName: data[0].symbol!)
+                            Image(data[0].symbol!)
                                 .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -152,7 +152,7 @@ struct WeatherView: View {
                                 ForEach(2..<21) { i in
                                     VStack{
                                         Text(data[i].hours)
-                                        Image(systemName: data[i].symbol!)
+                                        Image(data[i].symbol!)
                                             .renderingMode(.original)
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)

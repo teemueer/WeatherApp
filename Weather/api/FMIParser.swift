@@ -96,7 +96,7 @@ class FMIParser: NSObject, XMLParserDelegate {
         case .Temperature:
             weatherStatus?.temperature = value
         case .WeatherSymbol3:
-            weatherStatus?.symbol = GetSymbol(value!)
+            weatherStatus?.symbol = "\(Int(value!))"
         case .WindDirection:
             weatherStatus?.windDirection = value
         case .WindSpeedMS:
