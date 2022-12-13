@@ -20,11 +20,12 @@ struct MainView: View {
             FavouriteView()
                 .tabItem { Image(systemName: "list.dash").imageScale(.large) }
                 .tag(2)
-             
+                .preferredColorScheme(darkMode ? .dark : .light)
             
             CalendarView()
                 .tabItem { Image(systemName: "calendar").imageScale(.large) }
                 .tag(3)
+                .preferredColorScheme(darkMode ? .dark : .light)
             
             SettingsView()
                 .tabItem { Image(systemName: "gear").imageScale(.large) }
