@@ -48,7 +48,7 @@ class FMI: ObservableObject {
             parser.delegate = fmiParser
             parser.parse()
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync{
                 self.data[place] = fmiParser.data
                 self.loc = place
             }

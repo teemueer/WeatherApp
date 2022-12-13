@@ -145,17 +145,13 @@ struct FavouriteDataView: View {
                 HStack{
                     ZStack{
                         VStack{
-                            Text("Cloud")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                            Text("Coverage")
+                            Text("Windspeed")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.white)
                             Spacer()
-                                .frame(height: 5.5)
-                            Text(String(format: "%.0f %%",data[0].totalCloudCover!))
+                                .frame(height: 29.5)
+                            Text(String(format: "%.1f m/s", data[0].windSpeed!))
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.white)
